@@ -1,13 +1,16 @@
-# 실습 1
+#다중 if 실습
+score = int(input("점수 입력: "))
+grade = "" #빈 문자열
+if score >= 90:
+    #print("A 등급")
+    grade = "A"
+elif 80 <= score and score < 90:
+    grade = "B"
+elif 70 <= score and score < 80:
+    grade = "C"
+elif 69 <= score and score < 70:
+    grade = "D"
+elif score < 60:
+    grade = "E"
 
-# 조건 - 시내에서 자동차의 주행속도가 50km 이상이면 "속도 위반입니다"
-# 아니면 "규정 속도 준수!!"를 출력하세요.
-# 주행속도 - 60km
-
-speed = float(input("주행속도를 입력하세요: "))
-if speed >= 50:
-    print("속도 위반입니다. 과태료 10만원 부과")
-else:
-    print("규정 속도 준수!! 당신은 좋은 사람!!")
-print(f"주행속도는 {speed}km입니다.")
-
+print(f'{grade} 등급입니다.')
