@@ -10,3 +10,4 @@ print(rainbow)
 #4.
 del rainbow[3:7]
 print(rainbow)
+

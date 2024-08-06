@@ -17,15 +17,25 @@ lower_case = "Hello".lower()
 print(upper_case, lower_case)
 
 friends = "존 루나 제리"
-print(friends.split(" "))
+a = friends.split(" ")
+print(a)
 
-alpha = "a:b:c:d"
-print(alpha.split(":"))
+# 입력 받아서 리스트 만들기
+input_num = input("숫자 입력: ").split(" ")
+numbers = []
+for i in input_num:
+    numbers.append(int(i))
 
-email = "codingOn@spreatics.com"
-print(email.split("@"))
+print(input_num)
+print(numbers)
 
-#replace
-msg = "Hello Python"
-print(msg.replace("Python", "C++"))
+# alpha = "a:b:c:d"
+# print(alpha.split(":"))
+#
+# email = "codingOn@spreatics.com"
+# print(email.split("@"))
+#
+# #replace
+# msg = "Hello Python"
+# print(msg.replace("Python", "C++"))
 
