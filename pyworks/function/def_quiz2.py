@@ -1,13 +1,20 @@
-def get_price(unit_price, cnt):
-    total_price = unit_price * cnt
-    if total_price < 20000:
-        total_price += 2500
-        return total_price
-    else:
-        return total_price
 
-product1 = get_price(10000,3)
-product2 = get_price(5000,3)
 
-print(f"상품1 가격: {format(product1, ',d')}원")
-print(f"상품2 가격: {format(product2, ',d')}원")
+# 실습 4
+
+def times():
+    numbers = []
+    n = 3
+    for i in range(1, 31):
+        if(i%n==0):
+            numbers.append(i)
+    return numbers, len(numbers)
+
+num = []
+num, cnt = times()
+
+for i in num:
+    print(i, end=" ")
+print()
+
+print(f'3의 배수의 개수: {cnt}')
