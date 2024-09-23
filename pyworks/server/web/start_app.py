@@ -2,10 +2,21 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
+
+# @app.route('/')
+# def index():
+#     # return "메인 페이지입니다."
+#     return render_template('index.html')
+
 @app.route('/')
 def index():
     # return "메인 페이지입니다."
-    return render_template('index.html')
+    return render_template('main.html')
+
+@app.route('/about')
+def about():
+    # return "메인 페이지입니다."
+    return render_template('about.html')
 
 @app.route('/season')
 def get_season():

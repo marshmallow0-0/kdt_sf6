@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>steam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        header {
+            background-color:  #003366;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+        nav a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            text-align: center;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .content {
+            padding: 20px;
+            text-align: center;
+        }
+        .content h2 {
+            margin-bottom: 20px;
+        }
+        .content p {
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        #selectContainer, #selectContainer2 {
+            margin-bottom: 20px;
+        }
+
+        #imageSelector, #imageSelector2 {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        #imageSelector:hover, #imageSelector2:hover {
+            background-color: #f1f1f1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        #myImage {
+            display: none; /* 처음에는 이미지가 보이지 않도록 함 */
+            margin-top: 20px;
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>steam</h1>
+    </header>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="about">About</a> <!-- About 클릭 시 about.html로 이동 -->
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="content">
+        <h2>사회적 요인</h2>
+        <div id="selectContainer2">
+            <label for="imageSelector2">그래프 선택: </label>
+            <select id="imageSelector2">
+                <option value="pie">파이차트</option>
+                <option value="graph">그래프</option>
+                <option value="correlation">상관 계수</option>
+                <option value="visualization">시각화</option>
+            </select>
+        </div>
+
+        <div id="selectContainer">
+            <label for="imageSelector">요소 선택: </label>
+            <select id="imageSelector">
+                <!-- 이곳의 옵션은 JavaScript에 의해 동적으로 추가될 것입니다 -->
+            </select>
+        </div>
+        <img id="myImage" src="" alt="Example Image">
+    </div>
+
+    <script>
+        const dataOptions = {
+            pie: [
+                { value: "../static/소득별.png", text: "남녀 소득수준" },
+            ],
+            graph: [
+                { value: "../static/stress_gender.png", text: "남녀 스트레스" },
+                { value: "../static/stress_age.png", text: "연령별" },
+            ],
+            correlation: [
+                { value: "../static/여가시간.png", text: "여가시간" },
+                { value: "../static/흡연율.png", text: "흡연율" },
+                { value: "../static/실업자.png", text: "실업자" },
+                { value: "../static/취업자.png", text: "취업자" },
+                { value: "../static/문화체육시설.png", text: "문화체육시설" },
+                { value: "../static/고혈압.png", text: "고혈압" },
+                { value: "../static/우울증.png", text: "우울증" },
+                { value: "../static/경제활동.png", text: "경제활동" },
+                { value: "../static/비경제활동.png", text: "비경제활동" },
+                { value: "../static/연관요소.png", text: "최종 상관계수" }
+            ],
+            visualization: [
+                { value: "../static/지역.png", text: "지역" },
+                { value: "../static/워드클라우드.png", text: "워드클라우드" },
+            ]
+        };
+
+        const imageSelector2 = document.getElementById("imageSelector2");
+        const imageSelector = document.getElementById("imageSelector");
+        const myImage = document.getElementById("myImage");
+
+        function updateImageOptions() {
+            const selectedGraphType = imageSelector2.value;
+            const options = dataOptions[selectedGraphType] || [];
+
+            // 기존 옵션 제거
+            imageSelector.innerHTML = "";
+
+            // 새로운 옵션 추가
+            options.forEach(option => {
+                const newOption = document.createElement("option");
+                newOption.value = option.value;
+                newOption.text = option.text;
+                imageSelector.appendChild(newOption);
+            });
+
+            // 첫 번째 옵션으로 초기화
+            if (options.length > 0) {
+                imageSelector.value = options[0].value;
+                myImage.src = options[0].value;
+                myImage.style.display = "block";
+            } else {
+                myImage.style.display = "none";
+            }
+        }
+
+        // 초기화: 첫 번째 그래프 타입에 대한 옵션을 로드
+        updateImageOptions();
+
+        // 그래프 종류 변경 시 이미지 옵션 업데이트
+        imageSelector2.addEventListener("change", updateImageOptions);
+
+        // 이미지 선택 시 해당 이미지 표시
+        imageSelector.addEventListener("change", function() {
+            myImage.src = this.value; // 선택된 이미지 소스로 변경
+            myImage.style.display = "block"; // 이미지 표시
+            myImage.style.width = "700px"; // 이미지 너비 설정
+            myImage.style.height = "500px"; // 이미지 높이 설정
+        });
+    </script>
+
+</body>
+</html>
